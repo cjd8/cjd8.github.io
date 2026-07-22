@@ -4,15 +4,17 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi, I'm Josh, .NET developer by day and Linux kernel developer by night. I
+started this blog in the hopes of helping out others that would like to start
+contributing to the kernel and don't know where to start.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I primarily work in the IIO subsystem, but occasionally I branch out to other
+subsystems (counter, hwmon etc.). Additionally, I *try* to fix bugs reported by
+syzkaller.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I am a maintainer of the following in the kernel:
+- [Vishay VEML3328 RGBCIR Light sensor](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/iio/light/veml3328.c)
 
+If you wish to see my kernel commits in mainline, you can do so [here](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Joshua+Crofts).
 
-[jekyll-organization]: https://github.com/jekyll
+Thanks for reading!
