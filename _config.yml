@@ -26,6 +26,9 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://cjd8.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 domain: "cjd8.github.io"
 
+author: Joshua Crofts
+github_username: cjd8
+
 # Build settings
 theme: minima
 plugins:

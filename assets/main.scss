@@ -1,0 +1,102 @@
+---
+---
+@import "minima";
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* Default (Clean, Modern Light Theme) */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-color: #334155;
+  --heading-color: #0f172a;
+  --accent-color: #2563eb;
+  --accent-hover: #1d4ed8;
+  --header-bg: rgba(248, 250, 252, 0.85);
+  --border-color: #e2e8f0;
+  --code-bg: #f1f5f9;
+}
+
+/* Set JetBrains Mono for EVERYTHING */
+html, body, input, textarea, button, select, code, pre, .site-title, .page-link {
+  font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', monospace !important;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', monospace !important;
+  color: var(--heading-color) !important;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+/* Links & Accents */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+.site-title, .site-title:visited, .page-link {
+  color: var(--heading-color) !important;
+  &:hover {
+    color: var(--accent-color) !important;
+  }
+}
+
+/* Glassmorphism Header with subtle line */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Code block container */
+pre, code {
+  background-color: var(--code-bg);
+  color: #0f172a;
+  border-radius: 6px;
+}
+
+/* Front Page Post Cards */
+.post-list > li {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+  }
+}
+
+.post-meta {
+  color: #64748b !important;
+}
+
+/* Footer with subtle top border */
+.site-footer {
+  border-top: 1px solid var(--border-color) !important;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
