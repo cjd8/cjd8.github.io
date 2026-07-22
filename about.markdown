@@ -18,3 +18,13 @@ I am a maintainer of the following in the kernel:
 If you wish to see my kernel commits in mainline, you can do so [here](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Joshua+Crofts).
 
 Thanks for reading!
+
+{% highlight c %}
+static int __init welcome(void)
+{
+    printk(KERN_INFO "Welcome to KBlog!\n");
+    return 0;
+}
+
+module_init(welcome);
+{% endhighlight %}
