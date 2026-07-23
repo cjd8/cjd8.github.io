@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    <h1 class="page-heading">Latest Posts</h1>
+    <ul class="post-list">
+      {%- for post in site.posts limit: 5 -%}
+      <li>
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem;">
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+          {% assign read_min = post.content | strip_html | number_of_words | divided_by: 200 | plus: 1 %}
+          <span class="post-meta">• {{ read_min }} min read</span>
+          {%- if post.categories.size > 0 -%}
+            <div class="post-categories">
+              {%- for category in post.categories -%}
+                <span class="category-badge">{{ category }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    <div style="margin-top: 2rem; text-align: center;">
+      <a href="{{ "/posts/" | relative_url }}" style="display: inline-block; padding: 0.5rem 1.2rem; background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px; color: var(--accent-color); font-weight: 600;">View all posts &rarr;</a>
+    </div>
+  {%- endif -%}
+</div>

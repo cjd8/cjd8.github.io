@@ -23,6 +23,14 @@
 
       <div class="footer-col footer-col-2">
         {%- include social.html -%}
+        <ul class="social-media-list" style="margin-top: 0.5rem;">
+          <li>
+            <a href="{{ "/feed.xml" | relative_url }}">
+              <svg class="svg-icon"><use xlink:href="{{ "/assets/minima-social-icons.svg#rss" | relative_url }}"></use></svg>
+              <span class="username">rss feed</span>
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div class="footer-col footer-col-3">
@@ -33,3 +41,25 @@
   </div>
 
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('pre').forEach((pre) => {
+    const button = document.createElement('button');
+    button.className = 'copy-code-btn';
+    button.innerText = 'Copy';
+    button.style.cssText = 'position: absolute; top: 8px; right: 8px; padding: 3px 8px; font-size: 11px; font-family: inherit; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; color: var(--accent-color); cursor: pointer; opacity: 0.75; transition: opacity 0.2s;';
+    
+    pre.style.position = 'relative';
+    pre.appendChild(button);
+
+    button.addEventListener('click', () => {
+      const code = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => { button.innerText = 'Copy'; }, 2000);
+      });
+    });
+  });
+});
+</script>

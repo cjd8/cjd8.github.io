@@ -3,7 +3,6 @@ layout: page
 title: About
 permalink: /about/
 ---
-
 Hi, I'm Josh, .NET developer by day and Linux kernel developer by night. I
 started this blog in the hopes of helping out others that would like to start
 contributing to the kernel and don't know where to start.
