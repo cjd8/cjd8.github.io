@@ -139,6 +139,24 @@ pre {
   .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #8f3f71; }      /* Numbers & Constants */
   .o, .ow { color: #076678; }                                        /* Operators */
   .n, .na, .nb, .nc, .no, .nv { color: #282623; }                     /* Names / Variables */
+
+  /* Diff Highlighting */
+  .gd {
+    color: #9d0006 !important;
+    background-color: rgba(157, 0, 6, 0.15) !important;
+    display: block;
+  }
+  .gi {
+    color: #284b25 !important;
+    background-color: rgba(40, 75, 37, 0.15) !important;
+    display: block;
+  }
+  .gu {
+    color: #076678 !important;
+    font-style: italic;
+    font-weight: 600;
+    display: block;
+  }
 }
 
 /* Front Page Post Cards */
