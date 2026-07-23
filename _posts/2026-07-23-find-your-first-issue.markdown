@@ -216,6 +216,6 @@ you'll find yourself submitting brand new drivers and doing major refactors.
 
 This is part 2 of a series on how to contribute to the Linux kernel.
 
-[1] https://www.kernel.org/doc/html/latest/process/coding-style.html
-[2] https://elixir.bootlin.com/linux/v7.2-rc4/source/include/linux/kernel.h
+[1] https://www.kernel.org/doc/html/latest/process/coding-style.html\
+[2] https://elixir.bootlin.com/linux/v7.2-rc4/source/include/linux/kernel.h\
 [3] https://lore.kernel.org/all/20260512073505.1310-1-joshua.crofts1@gmail.com/
