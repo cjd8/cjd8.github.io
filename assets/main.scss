@@ -4,17 +4,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-/* Default (Clean, Modern Light Theme) */
+/* Warm Parchment Single Theme */
 :root {
-  --bg-color: #f8fafc;
-  --card-bg: #ffffff;
-  --text-color: #334155;
-  --heading-color: #0f172a;
-  --accent-color: #2563eb;
-  --accent-hover: #1d4ed8;
-  --header-bg: rgba(248, 250, 252, 0.85);
-  --border-color: #e2e8f0;
-  --code-bg: #f1f5f9;
+  --bg-color: #f7f4ef;
+  --card-bg: #fffdfa;
+  --text-color: #363432;
+  --heading-color: #1c1917;
+  --accent-color: #05616b;
+  --accent-hover: #033f46;
+  --header-bg: rgba(247, 244, 239, 0.88);
+  --border-color: #e2dbc9;
+  --code-bg: #eae3d2;
+  --code-text: #282623;
 }
 
 /* Set JetBrains Mono for EVERYTHING */
@@ -29,12 +30,40 @@ body {
   font-size: 15px;
 }
 
-/* Headings */
+/* Normalized Typography & Headings Scale */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', monospace !important;
   color: var(--heading-color) !important;
   font-weight: 700;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.3px;
+}
+
+h1, .page-heading, .post-title, .post-list-heading {
+  font-size: 1.75rem !important;
+  line-height: 1.25 !important;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+h2 {
+  font-size: 1.35rem !important;
+  line-height: 1.3 !important;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.15rem !important;
+  line-height: 1.35 !important;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+h4, h5, h6 {
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 /* Links & Accents */
@@ -55,6 +84,23 @@ a {
   }
 }
 
+/* Post titles on front page */
+.post-link, .post-link:visited {
+  color: var(--heading-color) !important;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-color) !important;
+  }
+}
+
+/* Custom diff syntax highlighting */
+.highlight .gd { color: #9d0006; background-color: rgba(157, 0, 6, 0.12); }  /* Line deleted */
+.highlight .gi { color: #284b25; background-color: rgba(40, 75, 37, 0.12); }  /* Line inserted */
+.highlight .gu { color: #7c6f64; font-style: italic; }                         /* Subunit/chunk header @@ */
+
 /* Glassmorphism Header with subtle line */
 .site-header {
   position: sticky;
@@ -69,8 +115,30 @@ a {
 /* Code block container */
 pre, code {
   background-color: var(--code-bg);
-  color: #0f172a;
+  color: var(--code-text);
   border-radius: 6px;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+/* Syntax Highlighting for Warm Parchment Theme */
+.highlight {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text);
+
+  .c, .ch, .cd, .cm, .c1, .cs { color: #7c6f64; font-style: italic; } /* Comments */
+  .cp, .cpf { color: #8f3f71; font-weight: 600; }                     /* Preprocessor / #include */
+  .k, .kd, .kn, .kp, .kr { color: #9d0006; font-weight: 600; }       /* Keywords (return, if, break) */
+  .kt { color: #076678; font-weight: 600; }                           /* Types (int, void, static) */
+  .nf, .fm { color: #b57614; font-weight: 600; }                      /* Functions (printk, welcome) */
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .si, .sx, .s1, .ss { color: #284b25; } /* Strings */
+  .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #8f3f71; }      /* Numbers & Constants */
+  .o, .ow { color: #076678; }                                        /* Operators */
+  .n, .na, .nb, .nc, .no, .nv { color: #282623; }                     /* Names / Variables */
 }
 
 /* Front Page Post Cards */
@@ -80,18 +148,18 @@ pre, code {
   border-radius: 10px;
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
     border-color: var(--accent-color);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+    box-shadow: 0 4px 12px rgba(5, 97, 107, 0.08);
   }
 }
 
 .post-meta {
-  color: #64748b !important;
+  color: #7c6f64 !important;
 }
 
 /* Footer with subtle top border */
@@ -99,4 +167,21 @@ pre, code {
   border-top: 1px solid var(--border-color) !important;
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  background: var(--code-bg);
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+  margin-right: 0.4rem;
+  font-weight: 500;
+}
+
+/* Hide default homepage RSS link in favor of footer RSS */
+.rss-subscribe {
+  display: none;
 }
