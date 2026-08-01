@@ -1,0 +1,120 @@
+---
+layout: post
+title: "New driver: Vishay VEML3328 RGBCIR Light Sensor"
+date: 2026-08-01 9:46:00 +0200
+categories: kernel iio
+---
+In June, my new (and first ever) driver for the Vishay VEML3328 light sensor has
+been merged into mainline and will be released as part of Linux 7.2, which I'm
+genuinely grateful for. If you told me in January 2026 that I'll have a driver
+merged in the kernel I wouldn't believe you - I didn't even know that kernel
+development happened on mailing lists! Anyhow - what is the VEML3328 and how
+does it work?
+
+## A brief description
+
+The Vishay VEML3328 is an RGB/Clear/IR light sensor that communicates via I2C [1]
+(more specifically SMBus, a standard which describes lightweight communication
+between a host and a device, commonly found in motherboard chipsets, but many
+sensors implement it these days). It provides a 16-bit output for the measured
+colours and comes in a *very* tiny package - good luck soldering this by hand.
+The datasheet recommends using it in devices that have automatic screen brightness
+adjustment based on the surrounding light, so perhaps the device you're reading
+this on may contain a VEML3328!
+
+## The actual driver
+
+Writing the driver was *interesting*. The IIO subsystem is in general well
+designed and has some pretty nifty features, but it can get overwhelming
+sometimes; my main issue was probably with defining the channels. If you're
+defining multiple channels that are of the same type (in our case, IIO_INTENSITY),
+each with a different modifier (R/G/B/C/IR), it's good practice to use a macro:
+
+```c
+#define VEML3328_CHAN_SPEC(_color, _addr) { \
+	.type = IIO_INTENSITY, \
+	.modified = 1, \
+	.channel2 = IIO_MOD_LIGHT_##_color, \
+	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW), \
+	.info_mask_shared_by_type = BIT(IIO_CHAN_INFO_SCALE), \
+	.info_mask_shared_by_type_available = BIT(IIO_CHAN_INFO_SCALE), \
+	.info_mask_shared_by_all = BIT(IIO_CHAN_INFO_INT_TIME), \
+	.info_mask_shared_by_all_available = BIT(IIO_CHAN_INFO_INT_TIME), \
+	.address = _addr, \
+}
+```
+
+`.type`, `.channel2`, `.address` and `.modified` are pretty self explanatory,
+but the `.info_mask_*` members trip me up the most - if it weren't for the IIO
+maintainer, Sashiko and Gemini I'd be totally lost! These attributes essentially
+describe how sysfs will behave from a userspace standpoint. For example, it
+makes sense to have each measured colour intensity exposed separately, but
+setting the integration time for each channel separately makes no sense,
+therefore sysfs will expose only one endpoint for this using the
+`.info_mask_shared_by_all` member. It looks intimidating in the beginning but
+after reading some more code it starts making sense, I promise!
+
+Another thing I implemented was pm_runtime to actually sleep the sensor when
+it's not doing anything. This is actually pretty simple - define a _suspend and
+_resume function that power down/power up the device and define them as your
+pm operations. This is relatively straightforward using one macro. In probe, you
+can set your device to suspend automatically after a certain time period. Last
+but not least - thanks to the `__cleanup` atribute that is offered by GNU
+extensions, you don't have to manually increase and decrease your reference
+count to wake and sleep the device; you just use one macro that automatically
+does this once the scope is exited! Much nicer.
+
+### An interesting feature: Ambient light sensing
+
+The IIO maintainer pointed out that the application notes for this sensor talk
+about using the green channel as an ambient light sensor [2], as the spectral
+characteristics match the "Human Eye" curve, cranking out more use cases from
+our sensor!
+
+## Testing
+
+Testing was pretty easy - it involved a Raspberry Pi 4 and a breakout board with
+the VEML3328 and initializing a new I2C device. If you're not using a devicetree
+overlay, it's very simple to actually initialize an I2C device, only one
+command is needed:
+
+```bash
+echo veml3328 0x28 | sudo tee /sys/bus/i2c/devices/your_i2c_device/new_device
+```
+
+We pass the name of the device and the I2C slave address and the device starts
+communicating via the kernel module, ready to accept reads/writes.
+
+A very odd thing that was pointed out to me when reviewing is that I forgot to
+sleep the device at the end of _probe() (Sashiko warned me about this, saying
+the device will stay awake until I send a command to it) using `pm_request_idle()`,
+but testing showed that the device went to sleep after probe, what gives? After
+a look around with AI, it turns out that the actual driver base (yes, the one
+that is fully responsible for interfacing all drivers with the kernel) automatically
+calls this after the devices's probe() function finishes; odd, but less work for
+us when doing a new version.
+
+## The elephant in the room: Assisted-by
+
+If you look at the commit message you can see an "Assisted-by: gemini:gemini-3.1"
+tag. My initial idea was to read documentation and other VEMLxxxx drivers, but
+this task has been proven harder than expected. Sometimes you just won't find
+the information you need in the documentation, only after running git grep for
+30 minutes straight you might find a small comment answering your question. This
+is the reason why AI is encouraged in the kernel and why there has been an uptick
+in new contributors, as it's an absolutely fantastic tool for explaining concepts
+in the kernel that aren't well documented. As long as you have read, tested and/or
+modified the code that you got using AI, an Assisted-by tag is nothing to be
+ashamed of, even top kernel maintainers use it.
+
+## Summary
+
+Writing and submitting a brand new driver was truly a fun and rewarding
+experience and I'm definitely coming back! In fact, as of writing this post I'm
+working on a new (albeit ~170 LOC, but with new dt bindings!) driver for the
+Microchip MCP47A1 Digital-to-Analog converter.
+
+If you would like to see the VEML3328 driver, you can do so [here](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/iio/light/veml3328.c)
+
+[1] https://www.vishay.com/docs/84968/veml3328.pdf
+[2] https://www.vishay.com/docs/80010/designingveml3328.pdf
