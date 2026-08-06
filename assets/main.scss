@@ -4,18 +4,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-/* Warm Parchment Single Theme */
+/* Pure Minimal Light Theme */
 :root {
-  --bg-color: #f7f4ef;
-  --card-bg: #fffdfa;
-  --text-color: #363432;
-  --heading-color: #1c1917;
-  --accent-color: #05616b;
-  --accent-hover: #033f46;
-  --header-bg: rgba(247, 244, 239, 0.88);
-  --border-color: #e2dbc9;
-  --code-bg: #eae3d2;
-  --code-text: #282623;
+  --bg-color: #ffffff;
+  --card-bg: #f3f4f6;
+  --text-color: #1f2937;
+  --heading-color: #111827;
+  --accent-color: #2563eb;
+  --accent-hover: #1d4ed8;
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --border-color: #e5e7eb;
+  --code-bg: #f3f4f6;
+  --code-text: #111827;
 }
 
 html {
@@ -111,11 +111,6 @@ a {
   }
 }
 
-/* Custom diff syntax highlighting */
-.highlight .gd { color: #9d0006; background-color: rgba(157, 0, 6, 0.12); }  /* Line deleted */
-.highlight .gi { color: #284b25; background-color: rgba(40, 75, 37, 0.12); }  /* Line inserted */
-.highlight .gu { color: #7c6f64; font-style: italic; }                         /* Subunit/chunk header @@ */
-
 /* Glassmorphism Header with subtle line */
 .site-header {
   position: sticky;
@@ -140,34 +135,34 @@ pre {
   border: 1px solid var(--border-color);
 }
 
-/* Syntax Highlighting for Warm Parchment Theme */
+/* Syntax Highlighting for Pure Minimal Light Theme */
 .highlight {
   background-color: var(--code-bg) !important;
   color: var(--code-text);
 
-  .c, .ch, .cd, .cm, .c1, .cs { color: #7c6f64; font-style: italic; } /* Comments */
-  .cp, .cpf { color: #8f3f71; font-weight: 600; }                     /* Preprocessor / #include */
-  .k, .kd, .kn, .kp, .kr { color: #9d0006; font-weight: 600; }       /* Keywords (return, if, break) */
-  .kt { color: #076678; font-weight: 600; }                           /* Types (int, void, static) */
-  .nf, .fm { color: #b57614; font-weight: 600; }                      /* Functions (printk, welcome) */
-  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .si, .sx, .s1, .ss { color: #284b25; } /* Strings */
-  .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #8f3f71; }      /* Numbers & Constants */
-  .o, .ow { color: #076678; }                                        /* Operators */
-  .n, .na, .nb, .nc, .no, .nv { color: #282623; }                     /* Names / Variables */
+  .c, .ch, .cd, .cm, .c1, .cs { color: #6b7280; font-style: italic; } /* Comments */
+  .cp, .cpf { color: #9333ea; font-weight: 600; }                     /* Preprocessor */
+  .k, .kd, .kn, .kp, .kr { color: #dc2626; font-weight: 600; }       /* Keywords */
+  .kt { color: #0284c7; font-weight: 600; }                           /* Types */
+  .nf, .fm { color: #d97706; font-weight: 600; }                      /* Functions */
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .si, .sx, .s1, .ss { color: #16a34a; } /* Strings */
+  .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #9333ea; }      /* Numbers & Constants */
+  .o, .ow { color: #0284c7; }                                        /* Operators */
+  .n, .na, .nb, .nc, .no, .nv { color: #111827; }                     /* Names / Variables */
 
   /* Diff Highlighting */
   .gd {
-    color: #9d0006 !important;
-    background-color: rgba(157, 0, 6, 0.15) !important;
+    color: #dc2626 !important;
+    background-color: rgba(220, 38, 38, 0.12) !important;
     display: block;
   }
   .gi {
-    color: #284b25 !important;
-    background-color: rgba(40, 75, 37, 0.15) !important;
+    color: #16a34a !important;
+    background-color: rgba(22, 163, 74, 0.12) !important;
     display: block;
   }
   .gu {
-    color: #076678 !important;
+    color: #2563eb !important;
     font-style: italic;
     font-weight: 600;
     display: block;
@@ -189,7 +184,7 @@ pre {
 }
 
 .post-meta {
-  color: #7c6f64 !important;
+  color: #6b7280 !important;
 }
 
 /* Footer with subtle top border */
