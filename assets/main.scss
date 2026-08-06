@@ -4,18 +4,23 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-/* Warm Parchment Single Theme */
+/* Pure Minimal Light Theme */
 :root {
-  --bg-color: #f7f4ef;
-  --card-bg: #fffdfa;
-  --text-color: #363432;
-  --heading-color: #1c1917;
-  --accent-color: #05616b;
-  --accent-hover: #033f46;
-  --header-bg: rgba(247, 244, 239, 0.88);
-  --border-color: #e2dbc9;
-  --code-bg: #eae3d2;
-  --code-text: #282623;
+  --bg-color: #ffffff;
+  --card-bg: #f3f4f6;
+  --text-color: #1f2937;
+  --heading-color: #111827;
+  --accent-color: #2563eb;
+  --accent-hover: #1d4ed8;
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --border-color: #e5e7eb;
+  --code-bg: #f3f4f6;
+  --code-text: #111827;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 /* Set JetBrains Mono for EVERYTHING */
@@ -84,22 +89,27 @@ a {
   }
 }
 
-/* Post titles on front page */
-.post-link, .post-link:visited {
-  color: var(--heading-color) !important;
-  font-weight: 600;
-  font-size: 1.2rem;
-  transition: color 0.2s ease;
+/* Post title link styling */
+.post-title a, .post-title a:visited {
+  color: inherit !important;
+  font-size: inherit !important;
+  text-decoration: none;
 
   &:hover {
     color: var(--accent-color) !important;
   }
 }
 
-/* Custom diff syntax highlighting */
-.highlight .gd { color: #9d0006; background-color: rgba(157, 0, 6, 0.12); }  /* Line deleted */
-.highlight .gi { color: #284b25; background-color: rgba(40, 75, 37, 0.12); }  /* Line inserted */
-.highlight .gu { color: #7c6f64; font-style: italic; }                         /* Subunit/chunk header @@ */
+/* Post links in list */
+.post-link, .post-link:visited {
+  color: var(--heading-color) !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-color) !important;
+  }
+}
 
 /* Glassmorphism Header with subtle line */
 .site-header {
@@ -125,59 +135,56 @@ pre {
   border: 1px solid var(--border-color);
 }
 
-/* Syntax Highlighting for Warm Parchment Theme */
+/* Syntax Highlighting for Pure Minimal Light Theme */
 .highlight {
   background-color: var(--code-bg) !important;
   color: var(--code-text);
 
-  .c, .ch, .cd, .cm, .c1, .cs { color: #7c6f64; font-style: italic; } /* Comments */
-  .cp, .cpf { color: #8f3f71; font-weight: 600; }                     /* Preprocessor / #include */
-  .k, .kd, .kn, .kp, .kr { color: #9d0006; font-weight: 600; }       /* Keywords (return, if, break) */
-  .kt { color: #076678; font-weight: 600; }                           /* Types (int, void, static) */
-  .nf, .fm { color: #b57614; font-weight: 600; }                      /* Functions (printk, welcome) */
-  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .si, .sx, .s1, .ss { color: #284b25; } /* Strings */
-  .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #8f3f71; }      /* Numbers & Constants */
-  .o, .ow { color: #076678; }                                        /* Operators */
-  .n, .na, .nb, .nc, .no, .nv { color: #282623; }                     /* Names / Variables */
+  .c, .ch, .cd, .cm, .c1, .cs { color: #6b7280; font-style: italic; } /* Comments */
+  .cp, .cpf { color: #9333ea; font-weight: 600; }                     /* Preprocessor */
+  .k, .kd, .kn, .kp, .kr { color: #dc2626; font-weight: 600; }       /* Keywords */
+  .kt { color: #0284c7; font-weight: 600; }                           /* Types */
+  .nf, .fm { color: #d97706; font-weight: 600; }                      /* Functions */
+  .s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .si, .sx, .s1, .ss { color: #16a34a; } /* Strings */
+  .m, .mb, .mx, .mf, .mh, .mi, .mo, .il, .kc { color: #9333ea; }      /* Numbers & Constants */
+  .o, .ow { color: #0284c7; }                                        /* Operators */
+  .n, .na, .nb, .nc, .no, .nv { color: #111827; }                     /* Names / Variables */
 
   /* Diff Highlighting */
   .gd {
-    color: #9d0006 !important;
-    background-color: rgba(157, 0, 6, 0.15) !important;
+    color: #dc2626 !important;
+    background-color: rgba(220, 38, 38, 0.12) !important;
     display: block;
   }
   .gi {
-    color: #284b25 !important;
-    background-color: rgba(40, 75, 37, 0.15) !important;
+    color: #16a34a !important;
+    background-color: rgba(22, 163, 74, 0.12) !important;
     display: block;
   }
   .gu {
-    color: #076678 !important;
+    color: #2563eb !important;
     font-style: italic;
     font-weight: 600;
     display: block;
   }
 }
 
-/* Front Page Post Cards */
-.post-list > li {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+/* Simple Post List */
+.post-list {
+  margin-left: 0;
+  list-style: none;
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
-    box-shadow: 0 4px 12px rgba(5, 97, 107, 0.08);
-  }
+.post-list > li {
+  margin-bottom: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
 }
 
 .post-meta {
-  color: #7c6f64 !important;
+  color: #6b7280 !important;
 }
 
 /* Footer with subtle top border */
