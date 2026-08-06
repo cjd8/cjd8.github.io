@@ -18,6 +18,11 @@
   --code-text: #282623;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 /* Set JetBrains Mono for EVERYTHING */
 html, body, input, textarea, button, select, code, pre, .site-title, .page-link {
   font-family: 'JetBrains Mono', 'JetBrainsMono Nerd Font', monospace !important;
@@ -84,11 +89,21 @@ a {
   }
 }
 
-/* Post titles on front page */
+/* Post title link styling */
+.post-title a, .post-title a:visited {
+  color: inherit !important;
+  font-size: inherit !important;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent-color) !important;
+  }
+}
+
+/* Post links in list */
 .post-link, .post-link:visited {
   color: var(--heading-color) !important;
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: 500;
   transition: color 0.2s ease;
 
   &:hover {
@@ -159,21 +174,18 @@ pre {
   }
 }
 
-/* Front Page Post Cards */
-.post-list > li {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+/* Simple Post List */
+.post-list {
+  margin-left: 0;
+  list-style: none;
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
-    box-shadow: 0 4px 12px rgba(5, 97, 107, 0.08);
-  }
+.post-list > li {
+  margin-bottom: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
 }
 
 .post-meta {
