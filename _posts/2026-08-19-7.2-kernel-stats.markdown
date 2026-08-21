@@ -1,0 +1,71 @@
+---
+layout: post
+title: "My dev statistics in Linux 7.2"
+date: 2026-08-19 16:00:00 +0200
+categories: kernel kbeginner
+---
+Linus Torvalds released Linux 7.2 as expected on August 16th, which means a lot
+of my changes and reviews will hit a lot of machines around the world (and
+hopefully won't cause any serious bugs!).
+
+## The additions
+
+- Added support for the Vishay VEML3328 RGBCIR light sensor.
+
+## The cleanups
+
+- Switched several drivers to use managed resources (devm_\*).
+- Moved several drivers to guard(mutex) usage.
+- Worked on a series modernizing the Asahi Kasei AK8975 magnetometer
+  with Andy Shevchenko of Intel
+- Loads of IWYU cleanups, as that is a current focus in the IIO subsystem
+
+## The fixes
+
+- Fixed several missing Kconfig dependencies which originally broke builds
+- Fixed a potential kernel stack leak
+
+
+...and loads more minor fixes :)
+
+## Raw shortlog
+``` 
+Joshua Crofts (36):
+      iio: magnetometer: ak8975: remove unnecessary braces
+      iio: frequency: ad9832: remove kernel.h proxy header
+      iio: frequency: ad9834: clean up includes
+      iio: magnetometer: hid-sensor-magn-3d: prefer 'u32' type
+      iio: light: opt3001: fix missing state reset on timeout
+      iio: frequency: ad9832: simplify bitwise math
+      iio: light: si1133: reset counter to prevent race condition
+      iio: light: si1133: prevent race condition on timeout
+      iio: light: si1133: remove unused macros
+      iio: light: si1133: prefer complex macros enclosed in parenthesis
+      iio: light: si1133: add missing include headers
+      iio: light: si1133: group generic <linux/*> headers
+      iio: light: si1133: add local variable for timeout
+      iio: light: si1133: use guard(mutex)() macro
+      iio: magnetometer: ak8975: sort headers alphabetically
+      iio: magnetometer: ak8975: update headers per IWYU principle
+      iio: magnetometer: ak8975: replace usleep_range() with fsleep()
+      iio: magnetometer: ak8975: change 'u8*' to 'u8 *' in cast
+      iio: magnetometer: ak8975: fix wrong errno on return
+      iio: magnetometer: ak8975: pass conversion timeouts as arguments
+      iio: magnetometer: ak8975: modernize polling loops with iopoll() macros
+      iio: magnetometer: ak8975: check if gpiod read was successful
+      iio: magnetometer: ak8975: ensure device is awake for buffered capture
+      iio: magnetometer: ak8975: fix potential kernel stack memory leak
+      iio: light: opt3001: make headers conform to iwyu
+      iio: light: opt3001: use macros from bits.h header
+      dt-bindings: iio: light: veml6030: add veml3328
+      iio: light: veml3328: add support for new device
+      hwmon: (max1619) add missing 'select REGMAP' to Kconfig
+      hwmon: (ltc2992) add missing 'select REGMAP_I2C' to Kconfig
+      hwmon: (max6697) add missing 'select REGMAP_I2C' to Kconfig
+      iio: light: al3000a: add missing REGMAP_I2C to Kconfig
+      iio: light: al3010: add missing REGMAP_I2C to Kconfig
+      iio: light: al3320a: add missing REGMAP_I2C to Kconfig
+      iio: adc: ad4130: add missing `select IIO_TRIGGERED_BUFFER` to Kconfig
+      iio: adc: ad7779: add missing 'select IIO_TRIGGERED_BUFFER' to Kconfig
+```
+
