@@ -12,7 +12,8 @@ subsystems (counter, hwmon etc.). Additionally, I *try* to fix bugs reported by
 syzkaller.
 
 I am a maintainer of the following in the kernel:
-- [Vishay VEML3328 RGBCIR Light sensor](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/iio/light/veml3328.c)
+- [Vishay VEML3328 RGBCIR Light Sensor](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/iio/light/veml3328.c)
+- [Microchip MCP47A1 6-bit Digital-to-Analog Converter](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/iio/dac/mcp47a1.c)
 
 If you wish to see my kernel commits in mainline, you can do so [here](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Joshua+Crofts).
 
