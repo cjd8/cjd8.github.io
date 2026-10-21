@@ -1,0 +1,51 @@
+---
+layout: post
+title: "My dev statistics in Linux 7.3"
+date: 2026-10-21 11:00:00 +0200
+categories: kernel
+---
+Another couple of weeks, another new kernel release. Not many interesting things
+from me, just some Kconfig cleanups, IIO patches and a syzbot fix in the NILFS
+filesystem. What is odd is that the number of Reviewed-by tags from me is higher
+than the number of patches...
+
+## The additions
+
+- Added support for the Microchip MCP47A1 Digital-to-Analog converter
+
+## The cleanups
+
+- Cleaned up the TI OPT3001 ambient light sensor driver (devm_\*, guard(mutex)(), function refactoring)
+- Replaced a custom macro with `str_plural()` in ext4, thanks to Coccinelle
+
+## The fixes
+
+- Fixed an infinite loop in the NILFS2 filesystem reported by syzbot. An operation would hang if a terminal error like -EROFS was encountered.
+- Added missing configfs_remove_default_groups() calls to the MIDI2 USB device. These missing calls were causing memory leaks on driver unbind.
+- Added several missing `select REGMAP` lines to Kconfig entries, preventing build failures.
+
+## Reviews
+
+I managed to add my Reviewed-by tag to 43 patches, spanning the IIO and counter subsystems.
+
+## Raw shortlog
+```
+Joshua Crofts (17):
+      iio: light: opt3001: move device registration to end of probe()
+      iio: light: opt3001: use local struct device and i2c_client variables
+      iio: light: opt3001: prefer dev_err_probe()
+      iio: light: opt3001: ensure correct parenthesis alignment
+      iio: light: opt3001: localize for loop iterator
+      iio: light: opt3001: move driver to guard(mutex)() use
+      iio: light: opt3001: switch driver to managed resources
+      iio: light: opt3001: add comment to mutex
+      iio: adc: max34408: add missing 'select REGMAP_I2C' to Kconfig
+      iio: adc: max14001: add missing 'select REGMAP' to Kconfig
+      iio: light: opt3001: split opt3001_get_processed() logic
+      ext4: use str_plural() instead of custom macro
+      nilfs2: fix infinite loop in nilfs_clean_segments()
+      dt-bindings: iio: dac: add support for mcp47a1
+      iio: dac: mcp47a1: add support for new device
+      iio: dac: mcp47feb02: add missing 'select REGMAP_I2C' to Kconfig
+      usb: gadget: midi2: remove default configfs groups on teardown
+```
